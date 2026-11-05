@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reportes | Gestión académica</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-pagina="reporte">
+    <div class="app-layout">
+        <aside class="menu-lateral">
+            <div class="menu-logo">
+                <i class="bi bi-mortarboard"></i>
+                <span>Gestión<br>académica</span>
+            </div>
+            <p class="menu-etiqueta">ADMINISTRACIÓN</p>
+            <nav>
+                <a class="menu-enlace" href="index_reporte.html" data-nav>
+                    <i class="bi bi-bar-chart"></i> Reportes
+                </a>
+                <a class="menu-enlace" href="index_estudiantes.html" data-nav>
+                    <i class="bi bi-people"></i> Estudiantes
+                </a>
+                <a class="menu-enlace" href="index_estudiantes.html#nuevo" data-nav>
+                    <i class="bi bi-person-plus"></i> Registrar estudiante
+                </a>
+                <a class="menu-enlace" href="index_cursos.html" data-nav>
+                    <i class="bi bi-book"></i> Cursos
+                </a>
+                <a class="menu-enlace" href="index_cursos.html#nuevo" data-nav>
+                    <i class="bi bi-journal-plus"></i> Registrar curso
+                </a>
+            </nav>
+
+            <div class="menu-pie">
+                Sistema de gestión universitaria
+                <strong>Estudiantes y cursos</strong>
+            </div>
+        </aside>
+        <div class="zona-principal">
+            <div class="barra-superior"></div>
+            <main id="contenido">
+                <h1 class="titulo-seccion">Reportes</h1>
+                <p class="subtitulo-seccion">Indicadores consolidados de estudiantes y cursos.</p>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="tarjeta tarjeta-dato">
+                            <div class="dato-titulo">Estudiantes <i class="bi bi-people"></i></div>
+                            <div class="dato-numero" id="totalEstudiantes">0</div>
+                            <div class="dato-nota">Registros en el sistema</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="tarjeta tarjeta-dato">
+                            <div class="dato-titulo">Cursos <i class="bi bi-book"></i></div>
+                            <div class="dato-numero" id="totalCursos">0</div>
+                            <div class="dato-nota">Cursos existentes</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="tarjeta tarjeta-dato">
+                            <div class="dato-titulo">Edad promedio <i class="bi bi-person"></i></div>
+                            <div class="dato-numero" id="edadGlobal">0</div>
+                            <div class="dato-nota">Años · consolidado global</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <h3>Estudiantes por curso</h3>
+                        <p>Distribución y edad promedio de los estudiantes asociados a cada curso.</p>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle tabla-datos">
+                            <thead>
+                                <tr>
+                                    <th>Curso</th>
+                                    <th>Código</th>
+                                    <th>Docente</th>
+                                    <th>Créditos</th>
+                                    <th>Estudiantes</th>
+                                    <th>Distribución</th>
+                                    <th>Edad promedio</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaReporte">
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted py-4">Calculando reporte...</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="4">Consolidado global</td>
+                                    <td id="globalEstudiantes">0</td>
+                                    <td>
+                                        <div class="distribucion">
+                                            <div class="barra">
+                                                <div id="globalBarra" style="width: 0%"></div>
+                                            </div>
+                                            <span id="globalPorcentaje">0%</span>
+                                        </div>
+                                    </td>
+                                    <td id="globalEdad">—</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="nota-tabla">
+                        <i class="bi bi-info-circle"></i>
+                        <span id="notaTotal">La distribución se calcula sobre el total de estudiantes.</span>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/estudiantes.js"></script>
+    <script src="js/cursos.js"></script>
+    <script src="js/reporte.js"></script>
+</body>
+
+</html>

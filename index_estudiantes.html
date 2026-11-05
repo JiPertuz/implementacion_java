@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Estudiantes | Gestión académica</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-pagina="estudiantes">
+    <div class="app-layout">
+        <aside class="menu-lateral">
+            <div class="menu-logo">
+                <i class="bi bi-mortarboard"></i>
+                <span>Gestión<br>académica</span>
+            </div>
+
+            <p class="menu-etiqueta">ADMINISTRACIÓN</p>
+            <nav>
+                <a class="menu-enlace" href="index_reporte.html" data-nav>
+                    <i class="bi bi-bar-chart"></i> Reportes
+                </a>
+                <a class="menu-enlace" href="index_estudiantes.html" data-nav>
+                    <i class="bi bi-people"></i> Estudiantes
+                </a>
+                <a class="menu-enlace" href="index_estudiantes.html#nuevo" data-nav>
+                    <i class="bi bi-person-plus"></i> Registrar estudiante
+                </a>
+                <a class="menu-enlace" href="index_cursos.html" data-nav>
+                    <i class="bi bi-book"></i> Cursos
+                </a>
+                <a class="menu-enlace" href="index_cursos.html#nuevo" data-nav>
+                    <i class="bi bi-journal-plus"></i> Registrar curso
+                </a>
+            </nav>
+
+            <div class="menu-pie">
+                Sistema de gestión universitaria
+                <strong>Estudiantes y cursos</strong>
+            </div>
+        </aside>
+
+        <div class="zona-principal">
+            <div class="barra-superior"></div>
+
+            <main id="contenido">
+                <h1 class="titulo-seccion">Estudiantes</h1>
+                <p class="subtitulo-seccion">Consulta, registra, edita y elimina los estudiantes del sistema.</p>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado d-flex justify-content-between flex-wrap gap-2">
+                        <div class="input-group buscador">
+                            <input type="text" id="buscador" class="form-control"
+                                placeholder="Buscar por nombre, apellido o email...">
+                            <button class="btn btn-secondary" type="button" id="btnBuscar">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                        <button class="btn btn-primary" type="button" id="btnNuevoEstudiante">
+                            <i class="bi bi-person-plus"></i> Crear nuevo estudiante
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle tabla-datos">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombres</th>
+                                    <th>Apellidos</th>
+                                    <th>Email</th>
+                                    <th>Edad</th>
+                                    <th>Programa</th>
+                                    <th>Curso</th>
+                                    <th>Creado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaEstudiantes">
+                                <tr>
+                                    <td colspan="9" class="text-center text-muted py-4">Cargando estudiantes...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="nota-tabla d-flex justify-content-between align-items-center flex-wrap gap-2">
+                        <span id="infoRegistros"></span>
+                        <nav>
+                            <ul class="pagination pagination-sm mb-0" id="paginacion"></ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modalEstudiante" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <form id="formEstudiante" novalidate>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="tituloModalEstudiante">Registrar estudiante</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Cerrar"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <input type="hidden" id="estudianteId">
+
+                                    <div class="mb-3">
+                                        <label for="idVisible" class="form-label">ID</label>
+                                        <input type="text" id="idVisible" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="nombres" class="form-label">Nombres:</label>
+                                            <input type="text" id="nombres" class="form-control"
+                                                placeholder="Ej: Jorge Ivan" required>
+                                            <div class="invalid-feedback">Escribe los nombres.</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="apellidos" class="form-label">Apellidos:</label>
+                                            <input type="text" id="apellidos" class="form-control"
+                                                placeholder="Ej: Pertuz Pertuz" required>
+                                            <div class="invalid-feedback">Escribe los apellidos.</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label">Email:</label>
+                                            <input type="email" id="email" class="form-control"
+                                                placeholder="nombre@correo.com" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+                                                required>
+                                            <div class="invalid-feedback">Escribe un correo válido.</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="edad" class="form-label">Edad:</label>
+                                            <input type="number" id="edad" class="form-control"
+                                                placeholder="Número entero (mín. 15)" min="15" step="1" required>
+                                            <div class="invalid-feedback">La edad debe ser un número entero de 15 o más.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="programa" class="form-label">Programa:</label>
+                                            <input type="text" id="programa" class="form-control"
+                                                placeholder="Ej: Ingenieria de Sistemas" required>
+                                            <div class="invalid-feedback">Escribe el programa académico.</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="idCurso" class="form-label">Curso:</label>
+                                            <select id="idCurso" class="form-select" required>
+                                                <option value="">Seleccione un curso...</option>
+                                            </select>
+                                            <div class="invalid-feedback">Selecciona un curso.</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="modal-footer justify-content-start">
+                                    <button type="submit" class="btn btn-primary" id="btnGuardarEstudiante">
+                                        <i class="bi bi-check-lg"></i> Guardar estudiante
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        <i class="bi bi-x-lg"></i> Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/estudiantes.js"></script>
+    <script src="js/cursos.js"></script>
+    <script src="js/reporte.js"></script>
+</body>
+
+</html>

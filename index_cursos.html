@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cursos | Gestión académica</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body data-pagina="cursos">
+    <div class="app-layout">
+        <aside class="menu-lateral">
+            <div class="menu-logo">
+                <i class="bi bi-mortarboard"></i>
+                <span>Gestión<br>académica</span>
+            </div>
+
+            <p class="menu-etiqueta">ADMINISTRACIÓN</p>
+            <nav>
+                <a class="menu-enlace" href="index_reporte.html" data-nav>
+                    <i class="bi bi-bar-chart"></i> Reportes
+                </a>
+                <a class="menu-enlace" href="index_estudiantes.html" data-nav>
+                    <i class="bi bi-people"></i> Estudiantes
+                </a>
+                <a class="menu-enlace" href="index_estudiantes.html#nuevo" data-nav>
+                    <i class="bi bi-person-plus"></i> Registrar estudiante
+                </a>
+                <a class="menu-enlace" href="index_cursos.html" data-nav>
+                    <i class="bi bi-book"></i> Cursos
+                </a>
+                <a class="menu-enlace" href="index_cursos.html#nuevo" data-nav>
+                    <i class="bi bi-journal-plus"></i> Registrar curso
+                </a>
+            </nav>
+
+            <div class="menu-pie">
+                Sistema de gestión universitaria
+                <strong>Estudiantes y cursos</strong>
+            </div>
+        </aside>
+
+        <div class="zona-principal">
+            <div class="barra-superior"></div>
+
+            <main id="contenido">
+                <h1 class="titulo-seccion">Cursos</h1>
+                <p class="subtitulo-seccion">Consulta, registra, edita y elimina los cursos del sistema.</p>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado d-flex justify-content-between flex-wrap gap-2">
+                        <div class="input-group buscador">
+                            <input type="text" id="buscadorCursos" class="form-control"
+                                placeholder="Buscar por nombre, código o docente...">
+                            <button class="btn btn-secondary" type="button" id="btnBuscarCurso">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                        <button class="btn btn-primary" type="button" id="btnNuevoCurso">
+                            <i class="bi bi-journal-plus"></i> Crear nuevo curso
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle tabla-datos">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre del curso</th>
+                                    <th>Código</th>
+                                    <th>Créditos</th>
+                                    <th>Docente</th>
+                                    <th>Descripción</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaCursos">
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted py-4">Cargando cursos...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="nota-tabla" id="infoCursos"></div>
+                </div>
+
+                <div class="modal fade" id="modalCurso" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <form id="formCurso" novalidate>
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="tituloModalCurso">Registrar curso</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Cerrar"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <input type="hidden" id="cursoId">
+
+                                    <div class="mb-3">
+                                        <label for="cursoIdVisible" class="form-label">ID</label>
+                                        <input type="text" id="cursoIdVisible" class="form-control" readonly>
+                                    </div>
+
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="cnombre" class="form-label">Nombre del curso:</label>
+                                            <input type="text" id="cnombre" class="form-control" placeholder="Ej: Electronica II"
+                                                required>
+                                            <div class="invalid-feedback">Escribe el nombre del curso.</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="codigo" class="form-label">Código:</label>
+                                            <input type="text" id="codigo" class="form-control" placeholder="Ej: 411099"
+                                                required>
+                                            <div class="invalid-feedback">Escribe el código del curso.</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="creditos" class="form-label">Créditos:</label>
+                                            <input type="number" id="creditos" class="form-control"
+                                                placeholder="Número entero" min="1" step="1" required>
+                                            <div class="invalid-feedback">Los créditos deben ser un número entero mayor
+                                                a 0.</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="docente" class="form-label">Docente:</label>
+                                            <input type="text" id="docente" class="form-control"
+                                                placeholder="Ej: Fransisco Barreiro" required>
+                                            <div class="invalid-feedback">Escribe el nombre del docente.</div>
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="descripcion" class="form-label">Descripción:</label>
+                                            <textarea id="descripcion" class="form-control" rows="3"
+                                                placeholder="Breve descripción del curso" required></textarea>
+                                            <div class="invalid-feedback">Escribe una descripción.</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer justify-content-start">
+                                    <button type="submit" class="btn btn-primary" id="btnGuardarCurso">
+                                        <i class="bi bi-check-lg"></i> Guardar curso
+                                    </button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                        <i class="bi bi-x-lg"></i> Cancelar y volver
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/estudiantes.js"></script>
+    <script src="js/cursos.js"></script>
+    <script src="js/reporte.js"></script>
+</body>
+
+</html>
