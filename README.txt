@@ -20,7 +20,7 @@ Jorge Pertuz:
 
 Santiago Lozano:
 - Implementación de la extensión para poder colaborar
-- Creación de index.html.html
+- Creación de index.html
 - Creación de index_estudiantes.html
 - Creación de estudiantes.js
 - Implementación de app.js

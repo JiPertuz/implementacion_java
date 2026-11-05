@@ -91,7 +91,7 @@ function formatearFecha(iso) {
 }
 
 function marcarMenu() {
-    const archivo = location.pathname.split("/").pop() || "index.html.html";
+    const archivo = location.pathname.split("/").pop() || "index.html";
 
     document.querySelectorAll("a[data-nav]").forEach(enlace => {
         const href = enlace.getAttribute("href");
